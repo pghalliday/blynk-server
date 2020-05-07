@@ -19,7 +19,7 @@ docker run mpherg/blynk-server:latest
 To forward IP ports from the host to the container, do this:
 
 ```sh
-docker run -p 8080:8080 -p 8441:8441 -p 9443:9443 mpherg/blynk-server:latest
+docker run -p 8080:8080 -p 9443:9443 mpherg/blynk-server:latest
 ```
 
 To persist data, mount a directory into the container:
@@ -28,10 +28,10 @@ To persist data, mount a directory into the container:
 docker run -v $(PWD):/data mpherg/blynk-server:latest
 ```
 
-To include your own server.properties file, mount it into /config/server.properties
+Custom property files should be mounted in the /blynk folder (next to the blynk server jarfile), eg:
 
 ```sh
-docker run -v $(PWD)/server.properties:/config/server.properties mpherg/blynk-server:latest
+docker run -v $(PWD)/server.properties:/blynk/server.properties -v $(PWD)/mail.properties:/blynk/mail.properties mpherg/blynk-server:latest
 ```
 
 Or you can use a data volume in another container (check out different data volume techniques [here](https://docs.docker.com/engine/tutorials/dockervolumes/)).
